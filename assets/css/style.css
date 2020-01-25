@@ -5,9 +5,14 @@ body {
     font-size: 16px;
 }
 
+ul {
+    padding: 0;
+}
+
 /*--Landing page styling--*/
 #landing-img {
-    background: linear-gradient(to bottom, rgba(136, 136, 136, 0.2) 0%, rgba(73, 65, 59, 0.2) 100%), url(../images/wall.jpg) no-repeat center 75%;
+    background: linear-gradient(to bottom, rgba(136, 136, 136, 0) 51%, rgba(210, 106, 59, 0.85) 100%), url(../images/sb.jpg) no-repeat center 75%;
+    /* background: linear-gradient(to bottom, rgba(136, 136, 136, 0.2) 0%, rgba(73, 65, 59, 0.2) 100%), url(../images/sb.jpg) no-repeat center 75%; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -22,17 +27,52 @@ body {
 
 }
 
+/*--Landing page text--*/
+
 #landing-text {
     color: #ffffff;
     font-size: 4rem;
+    text-shadow: 0px 3px 3px #e9ecef6b;
 
 }
 
 #landing-sub {
     color: #ffffff;
     font-size: 2rem;
+    text-shadow: 0px 3px 3px #e9ecef6b;
 }
 
+
+/*--Instructions Text--*/
+.underline {
+    text-decoration: underline;
+    text-shadow: 0px 3px 3px #e9ecef6b;
+}
+
+.instructions-head {}
+
+#instructions {
+    color: #ffffff;
+    font-size: 1.2rem;
+    text-shadow: 0px 3px 3px #e9ecef6b;
+}
+
+.instructions-list-text {
+    color: #ffffff;
+    font-size: 1.2rem;
+    list-style-type: none;
+    text-shadow: 0px 3px 3px #e9ecef6b;
+}
+
+
+
+
+
+
+
+
+
+/*--Footer Icons--*/
 .github {
     font-size: 5rem;
     color: #ffffff;
