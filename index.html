@@ -38,17 +38,19 @@
                             <li class="instructions-list-text">Each time you get a correct answer your score will update.</li>
                             <li class="instructions-list-text">Your final score will display when the game finishes.</li>
                             <li class="instructions-list-text underline">ENJOY!</li>
-                            
                             </ul>
                             </div>
 
 					</div>
                     <!--Form selection added for choice of catagories and difficulty-->
-					<!-- <select class="form-control" id="catagories"><option>Choose a Catagory</option></select>
-					<select class="form-control" id="difficulty"><option>Choose a Difficulty</option></select> -->
-					<div class="col-12">
-						<button type="button" class="btn btn-light">Start!</button>
+                    <div class="container">
+					<select class="form-control dropdown" id="catagories"><option>Choose a Catagory</option></select>
+					<select class="form-control dropdown" id="difficulty"><option>Choose a Difficulty</option></select>
+                    <select class="form-control dropdown" id="questions"><option>Number of Questions</option></select>
+                    <div class="col-12">
+						<button type="button" class="btn btn-light" onclick="startGame()" id="startgame">Start!</button>
 					</div>
+                    </div>
 				</div>
                 <!--Footer Icons for github and slack referrals-->
 				<ul>
