@@ -60,6 +60,22 @@ You should also mention in this section any interesting bugs or problems you dis
 
 If this section grows too long, you may want to split it off into a separate file and link to it from here.
 
+## Bugs and problems
+
+- API BUG -
+Issue with the api that has been identified - some of the results from the api come back with no objects this is due to the api not having questions for the specific topics, to overcome this I will be removing the topics that come back with no data from the array so the user experience is continued.
+Below is the topics from the api that are currently showing results of [];
+
+1.Entertainment : musicals & Theatres
+2.Science: Mathematics
+3.Politics
+4.Art
+
+- Url fetch issue
+Changing the parameter of my const URL was showing issues in the debugging process - I was using google chrome tools for debugging, I began using the breakpoints to pause the action of a function to ensure things were running correctly - I found I was getting a failed promise from the api response as the URL details were incorrect - only after debugging and spending time trying to resolve the issue proved that the spelling of one word was incorrect, once this was changed the api began pulling the information correctly once again.
+
+- 
+
 ## Deployment
 
 This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
