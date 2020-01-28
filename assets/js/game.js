@@ -1,21 +1,30 @@
-//Fetching data from the API
-// https://opentdb.com/api.php?amount=10
+// function created to populate the dropdowns
+function populateDropDowns(data) {
+    //console.log('DATA IN POP DROPDOWNS ', data) - was used for debugging
+    // Selecting the elements by ID using Jquery
+    const categoryDropDown = $('#categories');
+    const difficultyDropDown = $('#difficulty');
+    const numberQuestions = $('#questions');
+    let i;
+    const triviaCategories = data.trivia_categories;
 
-// https://opentdb.com/api.php?amount=10&category=10&difficulty=easy
+    // loop trough triviaCategories array and add them to the categories dropdown
+    for (i = 0; i < triviaCategories.length; i++) {
+        categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
 
-// OLD syntax 
-// function fetchCatagories() {
-//     fetch('https://opentdb.com/api_category.php')
-//         .then(function(result) {
-//             return result.json()}
-//         )
-//         .then(function(data) {
-//             return populateDropDowns(data);
-//         });
-// }
+    }
+    // Appened easy to difficulty dropdown
+    difficultyDropDown.append("<option value='easy'>Easy</option>");
+    // Appened medium to difficulty dropdown    
+    difficultyDropDown.append("<option value='medium'>Medium</option>");
+    // Appened hard to difficulty dropdown
+    difficultyDropDown.append("<option value='hard'>Hard</option>");
+    //Append some question counts - ToDo Add more after potentially removing this field
+    numberQuestions.append("<option value=10>10</option>");
+}
 
-//below is a function 
-function fetchCatagories() {
+//below is a function that pulls the category from the api
+const fetchCategories = () => {
     fetch('https://opentdb.com/api_category.php')
         .then(result => result.json())
         .then(data => {
@@ -23,102 +32,37 @@ function fetchCatagories() {
         });
 }
 
-fetchCatagories()
-
-// function created to populate the dropdowns
-
-function populateDropDowns(data) {
-    // Select the elements by ID using Jquery
-    const catagoryDropDown = $('#catagories');
-    const difficultyDropDown = $('#difficulty');
-    const numberQuestions = $('#questions');
-    let i;
-    const triviaCategories = data.trivia_categories;
-
-    // loop trough triviaCategories array and add them to the catagories dropdown
-    for (i = 0; i < triviaCategories.length; i++) {
-        catagoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
-
-    }
-    // Appened easy to difficulty dropdown
-    difficultyDropDown.append("<option value='easy'>Easy</option>");
-    // Appened easy to difficulty dropdown    
-    difficultyDropDown.append("<option value='medium'>Medium</option>");
-    // Appened easy to difficulty dropdown
-    difficultyDropDown.append("<option value='hard'>Hard</option>");
-}
-
-const Person = {
-    name: 'Phil'
-};
-
-//$('#catagories')[0].value;
 function startGame() {
-    // 1. Get the value from the Category dropdown.
-    const catagoryDropDown = $('#catagories')[0].value;
-    // 2. Get the difficulty from the difficulty dropdown.
+    //Get the value from the Category dropdown.
+    const categoryDropDown = $('#categories')[0].value;
+    //Get the difficulty from the difficulty dropdown.
     const difficultyDropDown = $('#difficulty')[0].value;
-    // 4. Get the type of questions.
+    //Get the type of questions.
     const numberQuestions = $('#questions')[0].value;
-    // 5. Generate the API url based on the user input (catagoryDropDown,difficultyDropDown)
-    const url = `https://opentdb.com/api.php?amount=${numberQuestions}&category=${catagoryDropDown}&difficulty=${difficultyDropDown}&type=mutliple`;
+    //Generate the API url based on the user input (numberQuestions,categoryDropDown,difficultyDropDown)
+    const url = `https://opentdb.com/api.php?amount=${numberQuestions}&category=${categoryDropDown}&difficulty=${difficultyDropDown}&type=multiple`;
+    //questionsArray set to an empty array so i can then iterate through the lenght of the data results and populate the array with the returned data
+    const questionsArray = [];
+    //Make a fetch request with the url for questions based on user input
+    fetch(url).then(response => response.json()).then(data => {
+        // questions back from the API
+        // iterate over the questions response (array) and populate ur local questions array
+        for (let x = 0; x < data.results.length; x++) {
+            questionsArray.push(data.results[x]);
+        }
+        console.log('questions array ', questionsArray);
+        // At this point I may show modal with first questions (questionsArray[0])
+        // Be sure to store the entire length of the array so i know when I am on the last question and can show the user the question count (const questionsLength = questionsArray.length)
 
-    // 6. Make a fetch request with the url
+        // slap the questionsArray[0] answers into answer boxes
 
-    // 7. Parse data like before and console.log
-    console.log(startGame);
-    // 8. Review and relax.
+        // ensure onClick handlers on each box (answer-box should probably be a button but I may use divs and paragraphs)
+
+        // on click for the selected answer - remove that question from the array, or iterate onto the next index (so questionsArray[0] -> questionsArray[1] and so on so forth)
+
+        // rinse and repeat until I reach the final index (array length) at which point I will have a show score button which will add up the count of all correct answers vs incorrect answers etc
+
+    });
 }
 
-
-
-//trying to log the apoi
-// fetch("https://opentdb.com/api.php?amount=100&category=15&difficulty=easy&type=multiple")
-//     .then(res => {
-//         return res.json();
-//     })
-//     .then(loadedQuestions => {
-//         console.log(loadedQuestions);
-//     })
-
-const question = document.getElementById('question');
-const answer = Array.from(document.getElementsByClassName('answer'));
-const points = 1;
-const maxquestions = 3;
-
-let openQuestion = {};
-let allowAnswers = true;
-let score = 0;
-let questionNumber = 0;
-let remainingQuestions = [];
-
-let questions = [{
-        question: "Which of these is a type of monster found in Minecraft?",
-        choice1: "Skeleton",
-        choice2: "Vampire",
-        choice3: "Warewolf",
-        choice4: "Minotaur",
-        answer: 1
-    },
-    {
-        question: "Who is the writer of the game Half-Life?",
-        choice1: "Robin Walker",
-        choice2: "Gabe Newell",
-        choice3: "Marc Laidlaw",
-        choice4: "Chet Faliszek",
-        answer: 3
-    },
-    {
-        question: "What is the title of song on the main menu in Halo?",
-        choice1: "Opening Suite",
-        choice2: "Shadows",
-        choice3: "Suite Autumn",
-        choice4: "Halo;",
-        answer: 4
-    }
-]
-
-
-//https://8000-d4c04d7c-700e-4c83-9d3d-84de3dca9633.ws-eu01.gitpod.io/test.html
-
-//https://opentdb.com/api_category.php
+fetchCategories();
