@@ -1,18 +1,28 @@
 // function created to populate the dropdowns
 function populateDropDowns(data) {
-    //console.log('DATA IN POP DROPDOWNS ', data) - was used for debugging
+    console.log('DATA IN POP DROPDOWNS ', data)
+    // - was used for debugging and finding the trivia_categories object
     // Selecting the elements by ID using Jquery
     const categoryDropDown = $('#categories');
     const difficultyDropDown = $('#difficulty');
-    const numberQuestions = $('#questions');
+    // const numberQuestions = $('#questions');
     let i;
     const triviaCategories = data.trivia_categories;
 
+    // for (i = 0; i < triviaCategories.length; i++) {
+    //     categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
+
+    // }
+
     // loop trough triviaCategories array and add them to the categories dropdown
     for (i = 0; i < triviaCategories.length; i++) {
-        categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
-
+        if (triviaCategories[i].id != 13) {
+            categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
+        } else {
+            console.log('category removed');
+        }
     }
+
     // Appened easy to difficulty dropdown
     difficultyDropDown.append("<option value='easy'>Easy</option>");
     // Appened medium to difficulty dropdown    
@@ -20,7 +30,7 @@ function populateDropDowns(data) {
     // Appened hard to difficulty dropdown
     difficultyDropDown.append("<option value='hard'>Hard</option>");
     //Append some question counts - ToDo Add more after potentially removing this field
-    numberQuestions.append("<option value=10>10</option>");
+    // numberQuestions.append("<option value=10>10</option>");
 }
 
 //below is a function that pulls the category from the api
@@ -38,12 +48,12 @@ function startGame() {
     //Get the difficulty from the difficulty dropdown.
     const difficultyDropDown = $('#difficulty')[0].value;
     //Get the type of questions.
-    const numberQuestions = $('#questions')[0].value;
+    // const numberQuestions = $('#questions')[0].value;
     //Generate the API url based on the user input (numberQuestions,categoryDropDown,difficultyDropDown)
-    const url = `https://opentdb.com/api.php?amount=${numberQuestions}&category=${categoryDropDown}&difficulty=${difficultyDropDown}&type=multiple`;
-    //questionsArray set to an empty array so i can then iterate through the lenght of the data results and populate the array with the returned data
+    const url = `https://opentdb.com/api.php?amount=10&category=${categoryDropDown}&difficulty=${difficultyDropDown}&type=multiple`;
+    //questionsArray set to an empty array so i can then iterate through the length of the data results and populate the array with the returned data
     const questionsArray = [];
-    //Make a fetch request with the url for questions based on user input
+    //Making a fetch request with the url for questions based on user input
     fetch(url).then(response => response.json()).then(data => {
         // questions back from the API
         // iterate over the questions response (array) and populate ur local questions array
@@ -51,7 +61,12 @@ function startGame() {
             questionsArray.push(data.results[x]);
         }
         console.log('questions array ', questionsArray);
+        console.log('categories data', categoryDropDown);
+
+
         // At this point I may show modal with first questions (questionsArray[0])
+        const questionsLength = questionsArray.length;
+
         // Be sure to store the entire length of the array so i know when I am on the last question and can show the user the question count (const questionsLength = questionsArray.length)
 
         // slap the questionsArray[0] answers into answer boxes
