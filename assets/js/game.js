@@ -14,12 +14,13 @@ function populateDropDowns(data) {
 
     // }
 
-    // loop trough triviaCategories array and add them to the categories dropdown
+    // loop trough triviaCategories array and add them to the categories dropdown removal of id numbers that had no data from the API
     for (i = 0; i < triviaCategories.length; i++) {
-        if (triviaCategories[i].id != 13) {
+        if (triviaCategories[i].id != 13 && triviaCategories[i].id != 19 && triviaCategories[i].id != 24 && triviaCategories[i].id != 25 && triviaCategories[i].id != 29 && triviaCategories[i].id != 30) {
             categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
+            console.log(i);
         } else {
-            console.log('category removed');
+            console.log('Index -', i, '& ID -', triviaCategories[i].id, 'was removed');
         }
     }
 
@@ -70,6 +71,12 @@ function startGame() {
         // Be sure to store the entire length of the array so i know when I am on the last question and can show the user the question count (const questionsLength = questionsArray.length)
 
         // slap the questionsArray[0] answers into answer boxes
+        const questions = document.getElementById('question');
+        const answers = Array.from(document.getElementsByClassName('answer'));
+        console.log('answers', answers);
+
+        let currentQuestion = {};
+        let waitRequest = true;
 
         // ensure onClick handlers on each box (answer-box should probably be a button but I may use divs and paragraphs)
 
