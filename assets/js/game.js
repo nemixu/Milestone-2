@@ -5,7 +5,6 @@ function populateDropDowns(data) {
     // Selecting the elements by ID using Jquery
     const categoryDropDown = $('#categories');
     const difficultyDropDown = $('#difficulty');
-    // const numberQuestions = $('#questions');
     let i;
     const triviaCategories = data.trivia_categories;
     // loop trough triviaCategories array and add them to the categories dropdown removal of id numbers that had no data from the API
@@ -14,6 +13,7 @@ function populateDropDowns(data) {
             categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
             console.log(i);
         } else {
+            //this else statement will be removed for final release - just here for own reference and debugging
             console.log('Index -', i, '& ID -', triviaCategories[i].id, 'was removed');
         }
     }
@@ -60,13 +60,15 @@ function startGame() {
         console.log('categories data', categoryDropDown);
 
         // At this point I may show modal with first questions (questionsArray[0])
+        const questionsLength = Math.random(Math.floor() * questionsArray.length);
 
-
-
+        //questions and answers variables
+        const liveQuestion = questionsArray[0].question;
         const correctAnswer = questionsArray[0].correct_answer;
         const wrongAnswer = questionsArray[0].incorrect_answers;
         console.log('wrong answer', wrongAnswer);
         console.log('correct answers', correctAnswer);
+        console.log('current question', liveQuestion);
 
 
         // Be sure to store the entire length of the array so i know when I am on the last question and can show the user the question count (const questionsLength = questionsArray.length)
