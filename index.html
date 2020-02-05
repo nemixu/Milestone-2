@@ -34,7 +34,7 @@
                             <p id="instructions" class="underline">Instructions:</p></div>
                             <ul class="instructions-list-text">
                             <li class="instructions-list-text">Choose one of the answers from the possible 4.</li>
-                            <li class="instructions-list-text">Once you choose an answer, wait for the next question.</li>
+                            <li class="instructions-list-text">Once you choose an answer, wait for the next question to appear.</li>
                             <li class="instructions-list-text">Each time you get a correct answer your score will update.</li>
                             <li class="instructions-list-text">Your final score will display when the game finishes.</li>
                             <li class="instructions-list-text underline">ENJOY!</li>
@@ -42,15 +42,36 @@
                             </div>
 
 					</div>
-                    <!--Form selection added for choice of catagories and difficulty-->
+                    <!--Form selection added for choice of category and difficulty-->
                     <div class="container">
-					<select class="form-control dropdown" id="catagories"><option>Choose a Catagory</option></select>
+					<select class="form-control dropdown" id="categories"><option>Choose a Category</option></select>
 					<select class="form-control dropdown" id="difficulty"><option>Choose a Difficulty</option></select>
-                    <select class="form-control dropdown" id="questions"><option>Number of Questions</option></select>
+                    <!-- <select class="form-control dropdown" id="questions"><option>Number of Questions</option></select> -->
                     <div class="col-12">
-						<button type="button" class="btn btn-light" onclick="startGame()" id="startgame">Start!</button>
+                    					<button type="button" class="btn btn-light" onclick="startGame()" id="startgame">Start!</button>
+                     
 					</div>
                     </div>
+                    <div class="container">
+        <div class="row">
+        <div class="col-12">
+            <h1 id="question">What is the question?</h1> 
+            </div>
+            <div class="col-12 col-md-6">
+            <p class="answer" data-number="1">Sample 1</p> 
+            </div>
+            <div class="col-12 col-md-6">
+            <p class="answer" data-number="2">Sample 2</p> 
+            </div>
+            <div class="col-12 col-md-6">
+            <p class="answer" data-number="3">Sample 3</p> 
+            </div>
+            <div class="col-12 col-md-6">
+            <p class="answer" data-number="4">Sample 4</p> 
+            </div>
+
+        </div>
+     </div>   
 				</div>
                 <!--Footer Icons for github and slack referrals-->
 				<ul>

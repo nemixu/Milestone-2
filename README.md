@@ -42,6 +42,8 @@ In addition, you may also use this section to discuss plans for additional featu
 
 ## Testing
 
+### Testing planning.
+
 In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
 
 Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
@@ -66,15 +68,16 @@ If this section grows too long, you may want to split it off into a separate fil
 Issue with the api that has been identified - some of the results from the api come back with no objects this is due to the api not having questions for the specific topics, to overcome this I will be removing the topics that come back with no data from the array so the user experience is continued.
 Below is the topics from the api that are currently showing results of [];
 
-1.Entertainment : musicals & Theatres
-2.Science: Mathematics
-3.Politics
-4.Art
+1. [4]Entertainment : musicals & Theatres
+2. [10]Science: Mathematics
+3. [24]Politics
+4. [25]Art
 
 - Url fetch issue
 Changing the parameter of my const URL was showing issues in the debugging process - I was using google chrome tools for debugging, I began using the breakpoints to pause the action of a function to ensure things were running correctly - I found I was getting a failed promise from the api response as the URL details were incorrect - only after debugging and spending time trying to resolve the issue proved that the spelling of one word was incorrect, once this was changed the api began pulling the information correctly once again.
 
-- 
+- Issue with removing 4 empty objects from the array at categoryDropDown.append - this was proven to be an issue to write clean code without having four if statements. I wanted to try and have the cleanest solution possible for this problem. The solution I currently have removes one of the objects from the array that has empty data from the api.
+
 
 ## Deployment
 
@@ -94,8 +97,12 @@ In addition, if it is not obvious, you should also describe how to run your code
 - The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
 
 ### Media
-- The photos used in this site were obtained from ...
+- The api resource is used from the opensource API Open Trivia DB - https://opentdb.com/
+- Background Image was sourced from https://www.pexels.com/
+- 
 
 ### Acknowledgements
 
-- I received inspiration for this project from X
+- I received inspiration for this project from my Mentor Simen Daehlin who suggested doing a project like this.
+- Slack community for the help with small issues that I was overlooking.
+- Reggie Morgan (Senior Dev) who gave suggestions on best practices.
