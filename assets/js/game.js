@@ -1,8 +1,3 @@
-const questions = document.getElementById('question');
-const answers = Array.from(document.getElementsByClassName('answer'));
-
-
-
 // function created to populate the dropdowns
 function populateDropDowns(data) {
     console.log('DATA IN POP DROPDOWNS ', data)
@@ -45,13 +40,12 @@ function startGame() {
     const categoryDropDown = $('#categories')[0].value;
     const difficultyDropDown = $('#difficulty')[0].value;
 
+    //getting the html element to dynamically update the question and answer text
     const questions = document.getElementById('question');
     const answers = Array.from(document.getElementsByClassName('answer'));
-
-
+    // declaring waitRequest for future implemenation of a variable that will be part of the statGame function that once all questions run it wil be accepting answers from the user
     let waitRequest = false;
 
-    
     //Generate the API url based on the user input (categoryDropDown,difficultyDropDown)
     const url = `https://opentdb.com/api.php?amount=10&category=${categoryDropDown}&difficulty=${difficultyDropDown}&type=multiple`;
     //questionsArray set to an empty array so i can then iterate through the length of the data results and populate the array with the returned data
@@ -66,20 +60,14 @@ function startGame() {
         console.log('categories data', categoryDropDown);
 
         // At this point I may show modal with first questions (questionsArray[0])
-        const questionsLength = Math.random(Math.floor() * questionsArray.length);
-        const liveQuestion = questionsArray[0].question;
 
-        answers.forEach(answer => {
-            const dataSet = answer.dataset["number"];
-            answer.innerText = questionsArray["answer" + number];
-        })
 
 
         const correctAnswer = questionsArray[0].correct_answer;
         const wrongAnswer = questionsArray[0].incorrect_answers;
         console.log('wrong answer', wrongAnswer);
         console.log('correct answers', correctAnswer);
-        console.log('current question', liveQuestion);
+
 
         // Be sure to store the entire length of the array so i know when I am on the last question and can show the user the question count (const questionsLength = questionsArray.length)
 
