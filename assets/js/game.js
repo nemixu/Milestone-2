@@ -1,27 +1,39 @@
 // function created to populate the dropdowns
-function populateDropDowns(data) {
+const categoryDropDown = $('#categories');
+const difficultyDropDown = $('#difficulty');
+const diffArray = ['Easy', 'Medium', 'Hard']
+const populateDropDowns = data => {
     console.log('DATA IN POP DROPDOWNS ', data)
-    // - was used for debugging and finding the trivia_categories object
-    // Selecting the elements by ID using Jquery
-    const categoryDropDown = $('#categories');
-    const difficultyDropDown = $('#difficulty');
-    let i;
     const triviaCategories = data.trivia_categories;
-    // loop trough triviaCategories array and add them to the categories dropdown removal of id numbers that had no data from the API
-    for (i = 0; i < triviaCategories.length; i++) {
-        if (triviaCategories[i].id != 13 && triviaCategories[i].id != 19 && triviaCategories[i].id != 24 && triviaCategories[i].id != 25 && triviaCategories[i].id != 29 && triviaCategories[i].id != 30) {
-            categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
-            console.log(i);
-        } else {
-            //this else statement will be removed for final release - just here for own reference and debugging
-            console.log('Index -', i, '& ID -', triviaCategories[i].id, 'was removed');
+    const arrangedCategories = [13, 19, 24, 25, 29, 30];
+    triviaCategories.forEach(category => {
+        if (arrangedCategories.includes(!triviaCategories.id)) {
+            categoryDropDown.append(
+                `<option value="${triviaCategories.id}">${triviaCategories.name}</option>`,
+            );
         }
-    }
-    // Appending hard coded values for the difficulty
-    difficultyDropDown.append("<option value='easy'>Easy</option>");
-    difficultyDropDown.append("<option value='medium'>Medium</option>");
-    difficultyDropDown.append("<option value='hard'>Hard</option>");
-}
+    });
+    diffArray.forEach(difficulty => {
+        difficultyDropDown.append(
+            `<option value="${difficulty.toLocaleLowerCase()}">${difficulty}</option>`
+        )
+    })
+};
+//     // loop trough triviaCategories array and add them to the categories dropdown removal of id numbers that had no data from the API
+//     for (let i; i = 0; i < triviaCategories.length; i++) {
+//         if (triviaCategories[i].id != 13 && triviaCategories[i].id != 19 && triviaCategories[i].id != 24 && triviaCategories[i].id != 25 && triviaCategories[i].id != 29 && triviaCategories[i].id != 30) {
+//             categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
+//             console.log(i);
+//         } else {
+//             //this else statement will be removed for final release - just here for own reference and debugging
+//             console.log('Index -', i, '& ID -', triviaCategories[i].id, 'was removed');
+//         }
+//     }
+//     // Appending hard coded values for the difficulty
+//     difficultyDropDown.append("<option value='easy'>Easy</option>");
+//     difficultyDropDown.append("<option value='medium'>Medium</option>");
+//     difficultyDropDown.append("<option value='hard'>Hard</option>");
+// }
 // END of populateDropDowns function
 
 
@@ -33,10 +45,10 @@ const fetchCategories = () => {
             populateDropDowns(data);
         });
 }
-// END of fetchCategories.
+// END of fetchCategories.s
 
 //startGame function created to append the difficulty and categories per the ID specified by the user.
-function startGame() {
+const startGame = () => {
     const categoryDropDown = $('#categories')[0].value;
     const difficultyDropDown = $('#difficulty')[0].value;
 
@@ -70,17 +82,10 @@ function startGame() {
         console.log('correct answers', correctAnswer);
         console.log('current question', liveQuestion);
 
-
         // Be sure to store the entire length of the array so i know when I am on the last question and can show the user the question count (const questionsLength = questionsArray.length)
 
         // slap the questionsArray[0] answers into answer boxes
         console.log('answers', answers);
-
-
-
-
-
-
 
         // ensure onClick handlers on each box (answer-box should probably be a button but I may use divs and paragraphs)
 
@@ -89,6 +94,7 @@ function startGame() {
         // rinse and repeat until I reach the final index (array length) at which point I will have a show score button which will add up the count of all correct answers vs incorrect answers etc
 
     });
-}
+};
+
 
 fetchCategories();
