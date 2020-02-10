@@ -2,17 +2,21 @@
 const categoryDropDown = $('#categories');
 const difficultyDropDown = $('#difficulty');
 const diffArray = ['Easy', 'Medium', 'Hard']
+
+
+
 const populateDropDowns = data => {
     console.log('DATA IN POP DROPDOWNS ', data)
     const triviaCategories = data.trivia_categories;
     const arrangedCategories = [13, 19, 24, 25, 29, 30];
     triviaCategories.forEach(category => {
-        if (arrangedCategories.includes(!triviaCategories.id)) {
+        if (triviaCategories.includes(arrangedCategories)) {
+            console.log('TESTER', categoryDropDown);
             categoryDropDown.append(
-                `<option value="${triviaCategories.id}">${triviaCategories.name}</option>`,
-            );
+                `<option value="${triviaCategories.id}">${triviaCategories.name}</option>`, );
         }
     });
+
     diffArray.forEach(difficulty => {
         difficultyDropDown.append(
             `<option value="${difficulty.toLocaleLowerCase()}">${difficulty}</option>`
@@ -36,7 +40,6 @@ const populateDropDowns = data => {
 // }
 // END of populateDropDowns function
 
-
 //Pulling the data from the api category list.
 const fetchCategories = () => {
     fetch('https://opentdb.com/api_category.php')
@@ -51,6 +54,8 @@ const fetchCategories = () => {
 const startGame = () => {
     const categoryDropDown = $('#categories')[0].value;
     const difficultyDropDown = $('#difficulty')[0].value;
+
+
 
     //getting the html element to dynamically update the question and answer text
     const questions = document.getElementById('question');
