@@ -6,58 +6,43 @@ const diffArray = ['Easy', 'Medium', 'Hard']
 
 
 const populateDropDowns = data => {
-    console.log('DATA IN POP DROPDOWNS ', data)
+    console.log('DATA IN POP DROPDOWNS ', data);
     const triviaCategories = data.trivia_categories;
-    const arrangedCategories = [13, 19, 24, 25, 29, 30];
-    triviaCategories.forEach(category => {
-        if (triviaCategories.includes(arrangedCategories)) {
-            console.log('TESTER', categoryDropDown);
-            categoryDropDown.append(
-                `<option value="${triviaCategories.id}">${triviaCategories.name}</option>`, );
+    const unwantedCategories = [13, 19, 24, 25, 29, 30];
+    let i;
+    for (i = 0; i < triviaCategories.length; i++) {
+        if (triviaCategories[i].id != 13) {
+            if (triviaCategories[i].id != 13 && triviaCategories[i].id != 19 && triviaCategories[i].id != 24 && triviaCategories[i].id != 25 && triviaCategories[i].id != 29 && triviaCategories[i].id != 30) {
+                categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
+                console.log(i);
+            } else {
+                console.log('category removed');
+                console.log('Index -', i, '& ID -', triviaCategories[i].id, 'was removed');
+            }
         }
-    });
-
-    diffArray.forEach(difficulty => {
-        difficultyDropDown.append(
-            `<option value="${difficulty.toLocaleLowerCase()}">${difficulty}</option>`
-        )
-    })
+    }
 };
-//     // loop trough triviaCategories array and add them to the categories dropdown removal of id numbers that had no data from the API
-//     for (let i; i = 0; i < triviaCategories.length; i++) {
-//         if (triviaCategories[i].id != 13 && triviaCategories[i].id != 19 && triviaCategories[i].id != 24 && triviaCategories[i].id != 25 && triviaCategories[i].id != 29 && triviaCategories[i].id != 30) {
-//             categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
-//             console.log(i);
-//         } else {
-//             //this else statement will be removed for final release - just here for own reference and debugging
-//             console.log('Index -', i, '& ID -', triviaCategories[i].id, 'was removed');
-//         }
-//     }
-//     // Appending hard coded values for the difficulty
-//     difficultyDropDown.append("<option value='easy'>Easy</option>");
-//     difficultyDropDown.append("<option value='medium'>Medium</option>");
-//     difficultyDropDown.append("<option value='hard'>Hard</option>");
-// }
-// END of populateDropDowns function
 
-//Pulling the data from the api category list.
+diffArray.forEach(difficulty => {
+    difficultyDropDown.append(
+        `<option value="${difficulty.toLocaleLowerCase()}">${difficulty}</option>`
+    )
+});
+
 const fetchCategories = () => {
     fetch('https://opentdb.com/api_category.php')
         .then(result => result.json())
         .then(data => {
             populateDropDowns(data);
-        });
-}
-// END of fetchCategories.s
+        })
+        .catch(error => console.error(error.message));
+};
+
 
 //startGame function created to append the difficulty and categories per the ID specified by the user.
 const startGame = () => {
     const categoryDropDown = $('#categories')[0].value;
     const difficultyDropDown = $('#difficulty')[0].value;
-
-
-
-    //getting the html element to dynamically update the question and answer text
     const questions = document.getElementById('question');
     const answers = Array.from(document.getElementsByClassName('answer'));
     // declaring waitRequest for future implemenation of a variable that will be part of the statGame function that once all questions run it wil be accepting answers from the user
@@ -83,6 +68,12 @@ const startGame = () => {
         const liveQuestion = questionsArray[0].question;
         const correctAnswer = questionsArray[0].correct_answer;
         const wrongAnswer = questionsArray[0].incorrect_answers;
+        const allAnswers = correctAnswer.concat(wrongAnswer);
+
+        question.innerText = liveQuestion.question;
+        console.log('test questions', liveQuestion)
+
+        console.log('ALL ANSWERS', allAnswers);
         console.log('wrong answer', wrongAnswer);
         console.log('correct answers', correctAnswer);
         console.log('current question', liveQuestion);
@@ -103,3 +94,30 @@ const startGame = () => {
 
 
 fetchCategories();
+
+
+// from line 32
+// triviaCategories.forEach(category => {
+//     console.log('ok it does something', category)
+//     if (triviaCategories.includes(unwantedCategories)) {
+//         console.log('IT HAS THE UNWANTED CATS', triviaCategories);
+//         categoryDropDown.append(
+//             `<option value="${triviaCategories.id}">${triviaCategories.name}</option>`, );
+//     }
+// });
+
+//     // loop trough triviaCategories array and add them to the categories dropdown removal of id numbers that had no data from the API
+//     for (let i; i = 0; i < triviaCategories.length; i++) {
+//         if (triviaCategories[i].id != 13 && triviaCategories[i].id != 19 && triviaCategories[i].id != 24 && triviaCategories[i].id != 25 && triviaCategories[i].id != 29 && triviaCategories[i].id != 30) {
+//             categoryDropDown.append(`<option value="${triviaCategories[i].id}">${triviaCategories[i].name}</option>`);
+//             console.log(i);
+//         } else {
+//             //this else statement will be removed for final release - just here for own reference and debugging
+//             console.log('Index -', i, '& ID -', triviaCategories[i].id, 'was removed');
+//         }
+//     }
+//     // Appending hard coded values for the difficulty
+//     difficultyDropDown.append("<option value='easy'>Easy</option>");
+//     difficultyDropDown.append("<option value='medium'>Medium</option>");
+//     difficultyDropDown.append("<option value='hard'>Hard</option>");
+// }
