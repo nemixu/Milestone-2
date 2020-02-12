@@ -67,12 +67,12 @@ const startGame = () => {
         //questions and answers variables
         const liveQuestion = questionsArray[0].question;
         const correctAnswer = questionsArray[0].correct_answer;
+
         const wrongAnswer = questionsArray[0].incorrect_answers;
         const allAnswers = correctAnswer.concat(wrongAnswer);
 
-        question.innerText = liveQuestion.question;
+        questions.innerHTML = liveQuestion;
         console.log('test questions', liveQuestion)
-
         console.log('ALL ANSWERS', allAnswers);
         console.log('wrong answer', wrongAnswer);
         console.log('correct answers', correctAnswer);
